@@ -1,5 +1,7 @@
 # Check that users have entered a valid
 # option based on a list
+
+
 def string_checker(question, valid_ans=("yes", "no")):
 
     error = f"Please enter a valid option from the following list: {valid_ans}"
@@ -27,7 +29,8 @@ def string_checker(question, valid_ans=("yes", "no")):
 
 # Main routine
 
-mathtype_list = [ "*", "+", "-", "xxx"]
+mathtype_list = [ "multiply", "*", "+", "add", "-", "sub", "xxx"]
+
 
 want_instructions = string_checker("Do you want to see the instructions?")
 
@@ -39,6 +42,14 @@ print("You chose: ", user_choice)# Check that users have entered a valid
 def string_checker(question, valid_ans=("yes", "no")):
 
     error = f"Please enter a valid option from the following list: {valid_ans}"
+    if user_choice == "multiply" or "*":
+        feedback = "you chose multiplication"
+    elif user_choice == "add" or "+":
+        feedback = "you chose addition"
+    elif user_choice == "sub" or "-":
+        feedback = "you chose subtraction"
+    else:
+        feedback = "you chose to exit the program."
 
     while True:
 
@@ -59,15 +70,3 @@ def string_checker(question, valid_ans=("yes", "no")):
         # print error if user does not enter something that is valid
         print(error)
         print()
-
-
-# Main routine
-
-mathtype_list = ["multiplication", "addition", "subtraction","xxx"]
-
-want_instructions = string_checker("Do you want to see the instructions?")
-
-print("You chose: ", want_instructions)
-
-user_choice = string_checker("Choose: ", mathtype_list)
-print("You chose: ", user_choice)
