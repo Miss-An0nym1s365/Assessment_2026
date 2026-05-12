@@ -15,7 +15,7 @@ def string_checker(question, valid_ans=("yes", "no")):
             if item == user_respond:
                 return item
 
-            elif user_response == item[0]:
+            elif user_respond == item[0]:
                 return item
 
             print(error)
@@ -24,8 +24,6 @@ def string_checker(question, valid_ans=("yes", "no")):
 # Main Routine
 
 mathtype_list = ["*", "+","-", "xxx"]
-
-user_respond = string_checker("Choose equation type: ", mathtype_list)
 
 if user_respond == "*":
     print("You have chosen multiplication...")
