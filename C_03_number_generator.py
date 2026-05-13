@@ -1,2 +1,1 @@
-import random
-secret = random.randint(low_num, high_num)
+ def equation_gen = input(question("what math type?")):
