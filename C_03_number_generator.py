@@ -1,16 +1,21 @@
-from B_01_rps_game_v2 import feedback
+import random
 
+def user_response(question):
+    """generates numbers for equations and stuff"""
+    print(question)
+error = "Please enter a valid integer answer..."
 
-def answer_check(question):
-     """checks if user got question right, with answer checked by computer"""
+num_choose = random.randint(1, 1000)
 
-question = 7+3
+question = f"What is {num_choose} + {num_choose} = "
 
-answer = answer_check(f"What is {question} ? ")
+check_ans = num_choose + num_choose
 
-if user input: "10"
-    feedback"you got it right "
+if user_response == check_ans:
+    print("HOORAH! you got it correct :)")
+elif user_response != check_ans:
+    print(f"The answer was actually {check_ans}")
+elif user_response == "xxx":
+    print("You chose to exit the program")
 else:
-    feedback = "u got it wrong..."
-
-    
+    print(error)
