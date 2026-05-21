@@ -4,17 +4,20 @@ def equation_gen(question):
     """generates equations"""
 
 # error = "Please enter a valid inter answer..."
+while True:
+    num_choose = random.randint(1, 1000)
+    num_choose2 = random.randint(1, 1000)
 
-num_choose = random.randint(1, 1000)
-num_choose2 = random.randint(1, 1000)
+    math_expression = f"{num_choose} + {num_choose2} "
 
-math_expression = f"{num_choose} + {num_choose2} "
+    print(math_expression)
 
-for item in range(0, 5):
-    equation_gen = random.choice()
+    again = input("Press <enter> to generate another equation: ")
 
-print(math_expression)
-
+    if again == "xxx":
+        print()
+        print("Program continues...")
+        break
 
 #
 # math_answer = eval(math_expression)
