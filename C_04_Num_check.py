@@ -1,9 +1,6 @@
-def num_check(question, num_type=int, low=0, exit_code="xxx"):
+def num_check(question, num_type=int, low=0,high=2000, exit_code="xxx"):
     """checks the user responses are valid"""
-    error = f"Please enter an integer that is more than {low}."
 
-    question = "Number? "
-    
     while True:
         # Ask user question and return response if
         # exit code is entered
@@ -15,11 +12,15 @@ def num_check(question, num_type=int, low=0, exit_code="xxx"):
         try:
             response = num_type(response)
 
-            if response > low:
-                return response
+            if response <= low:
+                print("Error: enter a number more than {low}.")
             else:
-                print(error)
+                return response
 
         # Show error if response is invalid
         except ValueError:
-            print(error)
+            print("Error: Please enter numbers only.")
+
+# Main routine
+number = num_check("Number: ")
+print("You entered: ", number)
