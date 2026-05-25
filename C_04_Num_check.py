@@ -13,13 +13,15 @@ def num_check(question, num_type=int, low=0,high=2000, exit_code="xxx"):
             response = num_type(response)
 
             if response <= low:
-                print("Error: enter a number more than {low}.")
+                print(f"Error: enter a number higher than {low}.")
+            elif response >= high:
+                print(f"Error: Please enter a number lower than {high}")
             else:
                 return response
 
         # Show error if response is invalid
         except ValueError:
-            print("Error: Please enter numbers only.")
+            print("Error: Please enter whole numbers only.")
 
 # Main routine
 number = num_check("Number: ")
