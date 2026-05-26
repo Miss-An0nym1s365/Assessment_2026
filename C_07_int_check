@@ -1,7 +1,6 @@
-def int_check(question, low=None, high=None,
-              exit_code=None):
+def int_check(question, low=None, high=None, exit_code=None):
 
-    # Error messages
+    # Create the error message
     if low is None and high is None:
         error = "Please enter an integer."
 
@@ -15,12 +14,8 @@ def int_check(question, low=None, high=None,
 
         response = input(question).lower()
 
-        # Check for exit code
+        # Check for infinite mode / exit code
         if response == exit_code:
-            return response
-
-        # Check for infinite mode
-        if response == "":
             return response
 
         try:
@@ -42,26 +37,23 @@ def int_check(question, low=None, high=None,
             print(error)
 
 
-# Main routine
+# Main routine starts here
 
+# Ask user for number of rounds
 num_rounds = int_check(
     "How many rounds? <Press Enter for infinite mode>: ",
     low=1,
-    exit_code="xxx"
+    exit_code=""
 )
 
-# Check for quit code
-if num_rounds == "xxx":
-    print("Program exited.")
-
-# Infinite mode
-elif num_rounds == "":
+# Check for infinite mode
+if num_rounds == "":
     mode = "infinite"
     num_rounds = float("inf")
 
-    print("Infinite mode activated.")
-
-# Normal mode
 else:
     mode = "normal"
-    print(f"You chose {num_rounds} rounds.")
+
+print()
+print(f"Mode: {mode}")
+print(f"Rounds: {num_rounds}")
