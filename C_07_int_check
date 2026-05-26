@@ -1,48 +1,67 @@
-def int_check(question, low=None, high=None, exit_code=None):
-    # if any integer is allowed...
+def int_check(question, low=None, high=None,
+              exit_code=None):
+
+    # Error messages
     if low is None and high is None:
-        error = "Please enter an integer"
+        error = "Please enter an integer."
 
-    # if the number needs to be more than an
-    # integer (ie: rounds / 'high number')
-    elif low is not None and high is None:
-        error = (f"Please enter an integer that is "
-                 f"more than / equal to {low}")
+    elif high is None:
+        error = f"Please enter an integer that is at least {low}."
 
-    # if the number needs to between low & high
     else:
-        error = (f"Please enter an integer that"
-                 f" is between {low} and {high} (inclusive)")
+        error = f"Please enter an integer between {low} and {high}."
 
     while True:
+
         response = input(question).lower()
 
-        # check for infinite mode / exit code
+        # Check for exit code
         if response == exit_code:
+            return response
+
+        # Check for infinite mode
+        if response == "":
             return response
 
         try:
             response = int(response)
 
-            # Check the integer is not too low...
+            # Too low
             if low is not None and response < low:
                 print(error)
 
-            # check response is more than the low number
+            # Too high
             elif high is not None and response > high:
                 print(error)
 
-            # if the response is valid, return it
+            # Valid response
             else:
                 return response
 
         except ValueError:
             print(error)
 
-# Ask user for number of rounds / infinite mode
-num_rounds = int_check("Rounds <enter for infinite>: ",
-                       low=1, exit_code="")
 
-if num_rounds == "":
+# Main routine
+
+num_rounds = int_check(
+    "How many rounds? <Press Enter for infinite mode>: ",
+    low=1,
+    exit_code="xxx"
+)
+
+# Check for quit code
+if num_rounds == "xxx":
+    print("Program exited.")
+
+# Infinite mode
+elif num_rounds == "":
     mode = "infinite"
-    num_rounds = 5
+    num_rounds = float("inf")
+
+    print("Infinite mode activated.")
+
+# Normal mode
+else:
+    mode = "normal"
+    print(f"You chose {num_rounds} rounds.")
