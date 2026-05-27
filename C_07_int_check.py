@@ -1,38 +1,35 @@
-def int_check(question, low=0, exit_code="xxx"):
-
-    # Create the error message
-    if low is None:
-        error = "Please enter the number of questions you'd like to ."
-
-    else:
-        error = f"Please enter the number of questions you'd like to answer"
+def int_check(question, low=None, exit_code=None):
 
     while True:
 
         response = input(question).lower()
 
-        # Check for infinite mode / exit code
+        # Infinite mode
+        if response == "":
+            return ""
+
+        # Exit program
+        if response == exit_code:
+            return exit_code
 
         try:
             response = int(response)
 
-            # Too low
-            if low is not None and response < low:
-                print(error)
+            # Check number is high enough
+            if response < low:
+                print(f"Please enter a number that is {low} or more.")
 
-            # Valid response
             else:
                 return response
 
         except ValueError:
-            print(error)
+            print("Please enter the number of questions you'd like to be asked")
 
 
 # Main routine starts here
 
-# Ask user for number of rounds
 num_questions = int_check(
-    "How many rounds? <Press Enter for infinite mode>: ",
+    "How many questions? <Press Enter for infinite mode>: ",
     low=1,
     exit_code="xxx"
 )
@@ -40,11 +37,13 @@ num_questions = int_check(
 # Check for infinite mode
 if num_questions == "":
     mode = "infinite"
-    num_questions = float("inf")
+    print("You chose infinite mode")
 
+# Check for quit
+elif num_questions == "xxx":
+    print("You chose to exit the program early >:|")
+
+# Normal mode
 else:
     mode = "normal"
-
-print()
-print(f"Mode: {mode}")
-print(f"Rounds: {num_questions}")
+    print(f"You're going to be asked {num_questions} questions.")
