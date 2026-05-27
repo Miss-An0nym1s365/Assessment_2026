@@ -4,9 +4,13 @@ def int_check(question, low=None, exit_code=None):
 
         response = input(question).lower()
 
-        # Check for exit code
+        # Infinite mode
+        if response == "":
+            return ""
+
+        # Exit program
         if response == exit_code:
-            return response
+            return exit_code
 
         try:
             response = int(response)
@@ -19,20 +23,27 @@ def int_check(question, low=None, exit_code=None):
                 return response
 
         except ValueError:
-            print("Please enter a whole number or 'xxx' to quit.")
+            print("Please enter a whole number, press Enter for infinite mode, or type 'xxx' to quit.")
 
 
 # Main routine starts here
 
 num_questions = int_check(
-    "How many questions? ",
+    "How many questions? <Press Enter for infinite mode>: ",
     low=1,
     exit_code="xxx"
 )
 
-# Check if user chose to quit
-if num_questions == "xxx":
+# Check for infinite mode
+if num_questions == "":
+    mode = "infinite"
+    print("Infinite mode selected.")
+
+# Check for quit
+elif num_questions == "xxx":
     print("Program exited.")
 
+# Normal mode
 else:
+    mode = "normal"
     print(f"You chose {num_questions} questions.")
