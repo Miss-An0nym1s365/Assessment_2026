@@ -64,7 +64,7 @@ def string_checker(question, valid_ans):
 
 
 def int_check(question, low=None, exit_code=None):
-    """Checks integer input"""
+    """Checks integer input for number of questions"""
 
     while True:
 
@@ -115,20 +115,6 @@ def equation_generator(choice):
     return question, answer
 
 
-def quiz_history(correct_answer, wrong_answer):
-    """Displays quiz history"""
-
-    total = correct_answer + wrong_answer
-
-    if total == 0:
-        print("No questions answered... :(")
-        return
-
-    correct_percent = correct_answer / total * 100
-    wrong_percent = wrong_answer / total * 100
-
-    print()
-    print("📜 Quiz History 📜")
 
 
 # Main routine starts here
@@ -142,20 +128,20 @@ want_instructions = yes_no("Do you want instructions? ")
 if want_instructions == "yes":
     instructions()
 
-# Choose math type
+# Let user choose math type
 math_type = string_checker(
     "Choose equation type (+, -, *): ",
     ["+", "-", "*"]
 )
 
-# Number of questions
+# Number of questions, user asks!!!!!!!!
 num_questions = int_check(
     "How many questions? <Press Enter for infinite mode>: ",
     low=1,
     exit_code="xxx"
 )
 
-# Quit program
+# Quit program/quiz
 if num_questions == "xxx":
     print("You chose to exit early >:|")
 
@@ -171,8 +157,8 @@ else:
     print()
     print(f"{mode} chosen")
 
-    # Quiz variables
-    questions_answered = 0
+    # Quiz answers for users history and question
+    quiz_history = []
     correct_answers = 0
     wrong_answers = 0
 
@@ -192,12 +178,12 @@ else:
         # Get answer
         user_answer = input("Your answer: ").lower()
 
-        # Quit early
+        # Let the user quit the quiz early
         if user_answer == "xxx":
             print("You exited the quiz.")
             break
 
-        # Check answer
+        # Check the user's answer
         try:
             user_answer = int(user_answer)
 
@@ -212,27 +198,30 @@ else:
 
         except ValueError:
             print("Please enter a whole number, try again.")
-            wrong_answers += 1
+            
 
-    # Quiz summary
+    # Quiz summary/ history for user
     print()
     print("🎉 Quiz Finished 🎉")
 
-    total_answered = correct_answers + wrong_answers
+    quiz_history.append(
+        f"{question[0]} Your answer: {user_response} | The Correct answer: {question[1]}")
 
-    # Ask for history
-    see_history = yes_no("Do you wanna see your quiz history? (￣▽￣)")
+    # Quiz history
+    quiz_history = yes_no("Do you wanna see your quiz history? (￣▽￣)")
 
-    if see_history == "yes":
-        quiz_history(correct_answers, wrong_answers)
+    if quiz_history == "yes":
+        print("Quiz History")
+        for item in quiz_history:
+            print(item)
+        print()
+        print(f"Total Correct: {correct_answers}")
+        print(f"Total Incorrect: {wrong_answers}")
+        print()
 
-    if total_answered > 0:
-        score_percent = correct_answers / total_answered * 100
-
-        print(f"You got {correct_answers} correct.")
-        print(f"You got {wrong_answers} wrong.")
-        print(f"Your score was {score_percent:.1f}%")
-
+        #Output stats
+        print(
+            f" Correct Answers: {correct_answers / num_questions * 100: .2f}% | Incorrect answers: {wrong_answers / num_questions * 100: .2f}%"
 
 
 print()
