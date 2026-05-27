@@ -164,7 +164,6 @@ else:
     # Infinite mode
     if num_questions == "":
         mode = "infinite"
-        num_questions = float("inf")
 
     else:
         mode = "normal"
