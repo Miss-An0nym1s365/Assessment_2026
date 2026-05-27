@@ -25,20 +25,22 @@ def instructions():
     print("""
 **** Instructions ****
 
-Welcome to the ULTIMATE MATH QUIZ!
+Hello and Wellcome to the ULTIMATE MATH QUIZ!
 
-Choose:
-- Addition (+)
-- Subtraction (-)
-- Multiplication (*)
+To begin, you will choose the types of questions
+you would like to answer. You can choose from:
+- addition(+)
+- subtraction(-)
+- multiplication(*)
 
-You can:
-- Press ENTER for infinite mode
-- Type xxx to quit early
+Then you must choose how many rounds you'd like to play.
 
-Try to answer as many questions correctly as possible!
+You can exit the quiz anytime by typing "xxx"
 
-Good luck 😎
+Your end goal is to get as many a questions possible without
+failing miserably. 
+
+Do YOU have what it takes? 🫵🤨
 """)
 
 
@@ -119,7 +121,7 @@ def quiz_history(correct_answer, wrong_answer):
     total = correct_answer + wrong_answer
 
     if total == 0:
-        print("No questions answered.")
+        print("No questions answered... :(")
         return
 
     correct_percent = correct_answer / total * 100
@@ -201,11 +203,11 @@ else:
             user_answer = int(user_answer)
 
             if user_answer == correct_answer:
-                print("✅ Correct!")
+                print("✅ Correct-a-mundo!")
                 correct_answers += 1
 
             else:
-                print("❌ Incorrect")
+                print("❌ Incorrect...")
                 print(f"The correct answer was {correct_answer}")
                 wrong_answers += 1
 
