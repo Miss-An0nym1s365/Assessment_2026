@@ -92,42 +92,41 @@ def int_check(question, low=None, exit_code=None):
 def equation_generator(choice):
     """Generates equations"""
 
-    num1 = random.randint(1, 20)
-    num2 = random.randint(1, 20)
+    num_choose = random.randint(1, 20)
+    num_choose2 = random.randint(1, 20)
+
+    num_choose_x = random.randint(1,12)
+    num_choose_x2 = random.randint(1,12)
 
     if choice == "+":
-        question = f"{num1} + {num2}"
-        answer = num1 + num2
+        question = f"{num_choose} + {num_choose2}"
+        answer = num_choose + num_choose2
 
     elif choice == "-":
-        question = f"{num1} - {num2}"
-        answer = num1 - num2
+        question = f"{num_choose} - {num_choose2}"
+        answer = num_choose - num_choose2
 
     else:
-        question = f"{num1} * {num2}"
-        answer = num1 * num2
+        question = f"{num_choose_x} x {num_choose_x2}"
+        answer = num_choose_x * num_choose_x2
 
     return question, answer
 
 
-def quiz_history(correct, wrong):
+def quiz_history(correct_answer, wrong_answer):
     """Displays quiz history"""
 
-    total = correct + wrong
+    total = correct_answer + wrong_answer
 
     if total == 0:
         print("No questions answered.")
         return
 
-    correct_percent = correct / total * 100
-    wrong_percent = wrong / total * 100
+    correct_percent = correct_answer / total * 100
+    wrong_percent = wrong_answer / total * 100
 
     print()
     print("📜 Quiz History 📜")
-    print(f"Correct: {correct}")
-    print(f"Wrong: {wrong}")
-    print(f"Correct Percentage: {correct_percent:.1f}%")
-    print(f"Wrong Percentage: {wrong_percent:.1f}%")
 
 
 # Main routine starts here
@@ -156,7 +155,7 @@ num_questions = int_check(
 
 # Quit program
 if num_questions == "xxx":
-    print("Program exited.")
+    print("You chose to exit early >:|")
 
 else:
 
@@ -169,20 +168,20 @@ else:
         mode = "normal"
 
     print()
-    print(f"Mode: {mode}")
+    print(f"{mode} chosen")
 
     # Quiz variables
-    rounds_played = 0
+    questions_answered = 0
     correct_answers = 0
     wrong_answers = 0
 
     # Quiz loop
-    while rounds_played < num_questions:
+    while questions_answered < num_questions:
 
-        rounds_played += 1
+        questions_answered += 1
 
         print()
-        print(f"Question {rounds_played}")
+        print(f"Question {questions_answered}")
 
         # Generate question
         question, correct_answer = equation_generator(math_type)
@@ -194,7 +193,7 @@ else:
 
         # Quit early
         if user_answer == "xxx":
-            print("You exited the quiz early.")
+            print("You exited the quiz.")
             break
 
         # Check answer
@@ -211,7 +210,7 @@ else:
                 wrong_answers += 1
 
         except ValueError:
-            print("Please enter a whole number.")
+            print("Please enter a whole number, try again.")
             wrong_answers += 1
 
     # Quiz summary
@@ -220,6 +219,12 @@ else:
 
     total_answered = correct_answers + wrong_answers
 
+    # Ask for history
+    see_history = yes_no("Do you wanna see your quiz history? (￣▽￣)")
+
+    if see_history == "yes":
+        quiz_history(correct_answers, wrong_answers)
+
     if total_answered > 0:
         score_percent = correct_answers / total_answered * 100
 
@@ -227,11 +232,8 @@ else:
         print(f"You got {wrong_answers} wrong.")
         print(f"Your score was {score_percent:.1f}%")
 
-    # Ask for history
-    see_history = yes_no("Do you want to see your quiz history? ")
 
-    if see_history == "yes":
-        quiz_history(correct_answers, wrong_answers)
 
 print()
 print("Thanks for playing!")
+print("You are now a smarter person! :)")
