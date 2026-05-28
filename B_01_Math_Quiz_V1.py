@@ -97,8 +97,8 @@ def equation_generator(choice):
     num_choose = random.randint(1, 20)
     num_choose2 = random.randint(1, 20)
 
-    num_choose_x = random.randint(1,12)
-    num_choose_x2 = random.randint(1,12)
+    num_choose_x = random.randint(1, 12)
+    num_choose_x2 = random.randint(1, 12)
 
     if choice == "+":
         question = f"{num_choose} + {num_choose2}"
@@ -113,8 +113,6 @@ def equation_generator(choice):
         answer = num_choose_x * num_choose_x2
 
     return question, answer
-
-
 
 
 # Main routine starts here
@@ -157,7 +155,7 @@ else:
     print()
     print(f"{mode} chosen")
 
-    # Quiz answers for users history and question
+    # Quiz answers for users history and questions
     quiz_history = []
     correct_answers = 0
     wrong_answers = 0
@@ -175,7 +173,7 @@ else:
 
         print(question)
 
-        # Get answer
+        # Get the user's answer
         user_answer = input("Your answer: ").lower()
 
         # Let the user quit the quiz early
@@ -198,7 +196,6 @@ else:
 
         except ValueError:
             print("Please enter a whole number, try again.")
-            
 
     # Quiz summary/ history for user
     print()
@@ -219,11 +216,10 @@ else:
         print(f"Total Incorrect: {wrong_answers}")
         print()
 
-        #Output stats
+        # Output stats
         print(
-            f" Correct Answers: {correct_answers / num_questions * 100: .2f}% | Incorrect answers: {wrong_answers / num_questions * 100: .2f}%"
+            f" Correct Answers: {correct_answers / num_questions * 100: .2f}% | Incorrect answers: {wrong_answers / num_questions * 100: .2f}%")
 
-
-print()
-print("Thanks for playing!")
-print("You are now a smarter person! :)")
+        print()
+        print("Thanks for playing!")
+        print("You are now a smarter person! :)")
