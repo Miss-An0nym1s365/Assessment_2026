@@ -96,6 +96,8 @@ def equation_generator(choice):
 
     num_choose = random.randint(1, 20)
     num_choose2 = random.randint(1, 20)
+    if num_choose < num_choose2:
+        num_choose, num_choose2 = num_choose2, num_choose
 
     num_choose_x = random.randint(1, 12)
     num_choose_x2 = random.randint(1, 12)
@@ -159,7 +161,7 @@ else:
     quiz_history = []
     correct_answers = 0
     wrong_answers = 0
-
+    questions_answered = [0]
     # Quiz loop
     while questions_answered < num_questions:
 
@@ -202,7 +204,7 @@ else:
     print("🎉 Quiz Finished 🎉")
 
     quiz_history.append(
-        f"{question[0]} Your answer: {user_response} | The Correct answer: {question[1]}")
+        f"{question[0]} Your answer: {user_answer} | The Correct answer: {question[1]}")
 
     # Quiz history
     quiz_history = yes_no("Do you wanna see your quiz history? (￣▽￣)")

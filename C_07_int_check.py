@@ -41,7 +41,7 @@ if num_questions == "":
 
 # Check for quit
 elif num_questions == "xxx":
-    print("You chose to exit the program early >:|")
+    print("You chose to exit the program early >:|  ")
 
 # Normal mode
 else:
