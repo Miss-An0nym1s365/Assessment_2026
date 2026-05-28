@@ -157,71 +157,90 @@ else:
     print()
     print(f"{mode} chosen")
 
-    # Quiz answers for users history and questions
-    quiz_history = []
-    correct_answers = 0
-    wrong_answers = 0
-    questions_answered = [0]
-    # Quiz loop
-    while questions_answered < num_questions:
+# Quiz answers for users history and questions
+quiz_history = []
+correct_answers = 0
+wrong_answers = 0
+question_number = 0
 
-        questions_answered += 1
+# Quiz loop
+while True:
 
-        print()
-        print(f"Question {questions_answered}")
+    # Stop if normal mode is finished
+    if mode == "normal" and question_number >= num_questions:
+        break
 
-        # Generate question
-        question, correct_answer = equation_generator(math_type)
+    question_number += 1
 
-        print(question)
-
-        # Get the user's answer
-        user_answer = input("Your answer: ").lower()
-
-        # Let the user quit the quiz early
-        if user_answer == "xxx":
-            print("You exited the quiz.")
-            break
-
-        # Check the user's answer
-        try:
-            user_answer = int(user_answer)
-
-            if user_answer == correct_answer:
-                print("✅ Correct-a-mundo!")
-                correct_answers += 1
-
-            else:
-                print("❌ Incorrect...")
-                print(f"The correct answer was {correct_answer}")
-                wrong_answers += 1
-
-        except ValueError:
-            print("Please enter a whole number, try again.")
-
-    # Quiz summary/ history for user
     print()
-    print("🎉 Quiz Finished 🎉")
+    print(f"Question {question_number}")
 
-    quiz_history.append(
-        f"{question[0]} Your answer: {user_answer} | The Correct answer: {question[1]}")
+    # Generate question
+    question, correct_answer = equation_generator(math_type)
 
-    # Quiz history
-    quiz_history = yes_no("Do you wanna see your quiz history? (￣▽￣)")
+    print(question)
 
-    if quiz_history == "yes":
-        print("Quiz History")
-        for item in quiz_history:
-            print(item)
+    # Get the user's answer
+    user_answer = input("Your answer: ").lower()
+
+    # Let the user quit the quiz early
+    if user_answer == "xxx":
+        print("You exited the quiz.")
+        break
+
+    # Check the user's answer
+    try:
+        user_answer = int(user_answer)
+
+        if user_answer == correct_answer:
+            print("✅ Correct-a-mundo!")
+            correct_answers += 1
+
+        else:
+            print("❌ Incorrect...")
+            print(f"The correct answer was {correct_answer}")
+            wrong_answers += 1
+
+        # Add result to history
+        quiz_history.append(
+            f"{question} | Your answer: {user_answer} | Correct answer: {correct_answer}"
+        )
+
+    except ValueError:
+        print("Please enter a whole number, try again.")
+
+
+# Quiz summary / history
+print()
+print("🎉 Quiz Finished 🎉")
+
+# Ask user if they want history shown
+show_history = yes_no("Do you wanna see your quiz history? (￣▽￣) ")
+
+if show_history == "yes":
+
+    print()
+    print("Quiz History")
+
+    for item in quiz_history:
+        print(item)
+
+    print()
+    print(f"Total Correct: {correct_answers}")
+    print(f"Total Incorrect: {wrong_answers}")
+
+    # Output stats
+    total_questions = correct_answers + wrong_answers
+
+    if total_questions > 0:
+
         print()
-        print(f"Total Correct: {correct_answers}")
-        print(f"Total Incorrect: {wrong_answers}")
-        print()
-
-        # Output stats
         print(
-            f" Correct Answers: {correct_answers / num_questions * 100: .2f}% | Incorrect answers: {wrong_answers / num_questions * 100: .2f}%")
+            f"Correct Answers: {correct_answers / total_questions * 100:.2f}% | "
+            f"Incorrect Answers: {wrong_answers / total_questions * 100:.2f}% | "
+            f"Total Score: {correct_answers} / {total_questions}"
+        )
 
-        print()
-        print("Thanks for playing!")
-        print("You are now a smarter person! :)")
+print()
+print("Thanks for playing!")
+print("You are now a smarter person! :)")
