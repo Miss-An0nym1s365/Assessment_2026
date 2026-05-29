@@ -166,7 +166,7 @@ question_number = 0
 # Quiz loop
 while True:
 
-    # Stop if normal mode is finished
+    # If normal mode has reached user's desired question count, stop generating equations/questions
     if mode == "normal" and question_number >= num_questions:
         break
 
@@ -175,12 +175,12 @@ while True:
     print()
     print(f"Question {question_number}")
 
-    # Generate question
+    # Generate math expression randomly
     question, correct_answer = equation_generator(math_type)
 
     print(question)
 
-    # Get the user's answer
+    # Get the user's answer for the question
     user_answer = input("Your answer: ").lower()
 
     # Let the user quit the quiz early
@@ -188,7 +188,7 @@ while True:
         print("You exited the quiz.")
         break
 
-    # Check the user's answer
+    # Check the user's answer is correct or incorrect, tell them
     try:
         user_answer = int(user_answer)
 
@@ -201,20 +201,20 @@ while True:
             print(f"The correct answer was {correct_answer}")
             wrong_answers += 1
 
-        # Add result to history
+        # Show user's answer vs correct answer for all questions
         quiz_history.append(
             f"{question} | Your answer: {user_answer} | Correct answer: {correct_answer}"
         )
 
     except ValueError:
-        print("Please enter a whole number, try again.")
+        print("Please enter a whole number next time, NO POINTS FOR YOU! >:[")
 
 
-# Quiz summary / history
+# Summarise quiz history for user
 print()
 print("🎉 Quiz Finished 🎉")
 
-# Ask user if they want history shown
+# Ask user if they want their quiz history shown
 show_history = yes_no("Do you wanna see your quiz history? (￣▽￣) ")
 
 if show_history == "yes":
@@ -229,8 +229,8 @@ if show_history == "yes":
     print(f"Total Correct: {correct_answers}")
     print(f"Total Incorrect: {wrong_answers}")
 
-    # Output stats
-    total_questions = correct_answers + wrong_answers
+    # Output statistics and give user scores on their input for questions
+    total_questions = question_number
 
     if total_questions > 0:
 
@@ -238,7 +238,7 @@ if show_history == "yes":
         print(
             f"Correct Answers: {correct_answers / total_questions * 100:.2f}% | "
             f"Incorrect Answers: {wrong_answers / total_questions * 100:.2f}% | "
-            f"Total Score: {correct_answers} / {total_questions}"
+            f"Total Score: {correct_answers} / {question_number}"
         )
 
 print()
