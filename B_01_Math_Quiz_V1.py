@@ -141,7 +141,7 @@ num_questions = int_check(
     exit_code="xxx"
 )
 
-# Quit program/quiz
+# Let user be able to quit quiz early, before questions are even asked.
 if num_questions == "xxx":
     print("You chose to exit early >:|")
 
@@ -155,7 +155,7 @@ else:
         mode = "normal"
 
     print()
-    print(f"{mode} chosen")
+    print(f"{mode} mode chosen")
 
 # Quiz answers for users history and questions
 quiz_history = []
